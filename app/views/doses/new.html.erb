@@ -1,6 +1,8 @@
-<h2>Here u can add doses for <strong> <%= @cocktail.name %></strong></h2>
-<%= simple_form_for [@cocktail, @dose] do |f| %>
-  <%= f.association :ingredient, collection: Ingredient.all %>
-  <%= f.input :description %>
-  <%= f.submit :add %>
-<% end %>
+<div class="conteiner">
+  <h2>Here u can add doses for <strong> <%= @cocktail.name %></strong></h2>
+  <%= simple_form_for [@cocktail, @dose] do |f| %>
+    <%= f.association :ingredient, collection: Ingredient.all %>
+    <%= f.input :description %>
+    <%= f.submit :add %>
+  <% end %>
+</div>
