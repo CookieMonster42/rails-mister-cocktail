@@ -1,12 +1,22 @@
-<div class="mt-2 bg-white">
-  <h1 class="text-center text-decoration-none">Here should be a list of cocktails</h1>
-  <% @cocktails.each do |cocktail| %>
-  <ul>
-    <li>
-      <%= link_to cocktail.name, cocktail_path(cocktail) %>
-      <%= link_to "🗑", cocktail, method: :delete %>
-    </li>
-  </ul>
-  <% end %>
-  <%= link_to "[+]", new_cocktail_path %>
+<%= render "shared/banner" do %>
+<div class="row align-items-start">
+  <h1>Your Cocktails!</h1>
+  <%= link_to "＋", new_cocktail_path, class: "ml-auto text-decoration-none" %>
+</div>
+<% end %>
+<div class="container bg-white">
+  <div class="cards flex-item">
+    <% @cocktails.each do |cocktail| %>
+    <div>
+      <div class="card">
+        <div class="card-titel text-shadow-none">
+          <%= link_to cocktail.name, cocktail_path(cocktail), class: "text-decoration-none" %>
+        </div>
+        <div class="card-button">
+          <%= link_to "Ｘ", cocktail, method: :delete, class: "text-decoration-none" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
 </div>

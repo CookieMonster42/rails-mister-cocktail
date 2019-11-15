@@ -1,4 +1,12 @@
+<%= render "shared/banner" do %>
+  <div style="background-image: url(https://unspelahbdkjd.com);">
+    <h1>here will be the cocktail: <%= @cocktail.name %></h1>
+  </div>
+<% end %>
 <div class="container mt-3">
   <%= render "shared/card" %>
-  <%= render "shared/dose" %>
+  <div class="d-flex bg-white mb-4 shadow-sm align-items-start " style="min-height: 250px;">
+    <%= render "shared/info", class: "flex-item" %>
+    <%= render "shared/dose", class: "flex-item" %>
+  </div>
 </div>
