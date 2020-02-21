@@ -1,30 +1,15 @@
-puts "clear the database"
-Cocktail.destroy_all
+require 'open-uri'
 
-Ingredient.create(name: "lemon")
-Ingredient.create(name: "banana")
-Ingredient.create(name: "strawberry")
-Ingredient.create(name: "mint")
-Ingredient.create(name: "vodka")
-Ingredient.create(name: "whisky")
-Ingredient.create(name: "beer")
-Ingredient.create(name: "gin")
-Ingredient.create(name: "tonic")
-Ingredient.create(name: "salt")
-Ingredient.create(name: "Rum")
-Ingredient.create(name: "Cointreau")
-Cocktail.create(name: "Moscow Mule")
-# Cocktail.create(name: "Whisky Sour")
-# Cocktail.create(name: "Mojito")
-# Cocktail.create(name: "Daiquiri")
-# Cocktail.create(name: "Margarita")
-# Cocktail.create(name: "Bloody Mary")
-# Cocktail.create(name: "Cosmopolitan")
-# Cocktail.create(name: "Tom Collins")
-# Cocktail.create(name: "Manhattan")
-# Cocktail.create(name: "Hangman's Blood")
-# Cocktail.create(name: "Irish Car bomb")
-# Cocktail.create(name: "Shandy")
-# Cocktail.create(name: "Blackthorn")
+puts "Destroy ingredients"
+Ingredient.destroy_all if Rails.env.development?
 
-puts "Now you've got some data"
+puts "Destroy Cocktails"
+Cocktail.destroy_all if Rails.env.development?
+
+puts "Create ingredients"
+url = "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
+ingredients = JSON.parse(open(url).read)
+ingredients["drinks"].each do |ingredient|
+  i = Ingredient.create(name: ingredient["strIngredient1"])
+  puts "create #{i.name}"
+end
